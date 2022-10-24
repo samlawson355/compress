@@ -29,7 +29,7 @@ func main() {
 	for _, bit := range uncompressed {
 		currBuf += string(bit)
 		if len(currBuf) == 8 {
-			parsed, err := strconv.ParseInt(currBuf, 2, 8)
+			parsed, err := strconv.ParseInt(currBuf, 2, 64)
 			if err != nil {
 				panic(err)
 			}
