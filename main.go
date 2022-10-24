@@ -6,7 +6,9 @@ import (
 	"strings"
 )
 
-const testString = ""
+const testString = "Suppose we want to add these two binary strings \"111\" and \"1011\" whose numeric values are 7 and 11 whose addition is 18 with binary representation \"10010\". Now we will do the addition of these strings step by step below.variables with the respective values you want to multiply.\n\nAs you can see the length of string \"111\" is less than \"1011\" so we have to make them equal for which we can add \"0\" in a string that is shorter in length due to which the value will also remain the same. The length of \"111\" is shorter than \"1011\" so we will add one zero."
+
+//const testString = "p'"
 
 func main() {
 
@@ -16,6 +18,7 @@ func main() {
 	}
 
 	compressedVersion := compress(out2)
+
 	uncompressed := uncompress(compressedVersion, string(out2[0]))
 
 	var (
@@ -26,7 +29,7 @@ func main() {
 	for _, bit := range uncompressed {
 		currBuf += string(bit)
 		if len(currBuf) == 8 {
-			parsed, err := strconv.ParseInt(currBuf, 2, 64)
+			parsed, err := strconv.ParseInt(currBuf, 2, 8)
 			if err != nil {
 				panic(err)
 			}
@@ -34,7 +37,6 @@ func main() {
 			currBuf = ""
 
 			received += string(int32(parsed))
-			continue
 		}
 	}
 
