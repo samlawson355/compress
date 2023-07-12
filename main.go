@@ -8,18 +8,16 @@ import (
 
 const testString = "Suppose we want to add these two binary strings \"111\" and \"1011\" whose numeric values are 7 and 11 whose addition is 18 with binary representation \"10010\". Now we will do the addition of these strings step by step below.variables with the respective values you want to multiply.\n\nAs you can see the length of string \"111\" is less than \"1011\" so we have to make them equal for which we can add \"0\" in a string that is shorter in length due to which the value will also remain the same. The length of \"111\" is shorter than \"1011\" so we will add one zero."
 
-//const testString = "p'"
-
 func main() {
 
-	var out2 string
+	var originalBits string
 	for _, letter := range testString {
-		out2 += fmt.Sprintf("%.8b", letter)
+		originalBits += fmt.Sprintf("%.8b", letter)
 	}
 
-	compressedVersion := compress(out2)
+	compressedBits := compress(originalBits)
 
-	uncompressed := uncompress(compressedVersion, string(out2[0]))
+	uncompressed := uncompress(compressedBits, string(originalBits[0]))
 
 	var (
 		currBuf  string
@@ -45,11 +43,11 @@ func main() {
 	fmt.Println("==== received ====")
 
 	fmt.Println("==== len(out2) ====")
-	fmt.Println(len(out2))
+	fmt.Println(len(originalBits))
 	fmt.Println("==== len(out2) ====")
 
 	fmt.Println("==== len(compressedVersion) ====")
-	fmt.Println(len(compressedVersion))
+	fmt.Println(len(compressedBits))
 	fmt.Println("==== len(compressedVersion) ====")
 }
 
@@ -90,19 +88,19 @@ func uncompress(compressed string, first string) string {
 	// first letter is our start
 	currBin := first
 
-	for _, bin := range compressed {
-		asInt, err := strconv.Atoi(string(bin))
+	for _, count := range compressed {
+		countAsInt, err := strconv.Atoi(string(count))
 		if err != nil {
 			panic(err)
 		}
 
-		sl := make([]string, asInt)
+		bitList := make([]string, countAsInt)
 
-		for i := range sl {
-			sl[i] = currBin
+		for i := range bitList {
+			bitList[i] = currBin
 		}
 
-		out += strings.Join(sl, "")
+		out += strings.Join(bitList, "")
 
 		if currBin == "1" {
 			currBin = "0"
