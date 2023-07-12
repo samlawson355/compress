@@ -25,14 +25,14 @@ func main() {
 
 	compressedBits := compress(originalBits)
 
-	uncompressed := uncompress(compressedBits, string(originalBits[0]))
+	uncompressedBits := uncompress(compressedBits, string(originalBits[0]))
 
 	var (
 		currBuf  string
 		received string
 	)
 
-	for _, bit := range uncompressed {
+	for _, bit := range uncompressedBits {
 		currBuf += string(bit)
 		if len(currBuf) == 8 {
 			parsed, err := strconv.ParseInt(currBuf, 2, 64)
